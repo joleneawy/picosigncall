@@ -10,30 +10,27 @@ import org.apache.http.impl.client.DefaultHttpClient;
 @SuppressWarnings("deprecation")
 public class PicoRunnerMain {
 	public static void main(String[] args) {
-		
-		String picoid = null;
+
 		String meetingroomid = null;
 		
 		if(args.length==0){
 			System.exit(0);
 		}
 
-		if(args.length==2){
-			picoid = args[0];
-			meetingroomid = args[1];
+		if(args.length==1){
+			meetingroomid = args[0];
 		
-			if(picoid==null || picoid.equalsIgnoreCase("") || meetingroomid==null || meetingroomid.equalsIgnoreCase("")){
+			if(meetingroomid==null || meetingroomid.equalsIgnoreCase("")){
 				System.exit(0);
 			}
 			
-			System.out.println("picoid: "+picoid);
 			System.out.println("meetingroomid: "+meetingroomid);
 		}
 
 		@SuppressWarnings("resource")
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
-			HttpGet httpGetRequest = new HttpGet("http://localhost:8080/pico/rest/generate/"+picoid+"/"+meetingroomid);
+			HttpGet httpGetRequest = new HttpGet("http://localhost:8080/PicoService/rest/generateimage/"+meetingroomid);
 			HttpResponse httpResponse = httpClient.execute(httpGetRequest);
 
 			System.out.println("----------------------------------------");
